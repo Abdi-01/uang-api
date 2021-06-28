@@ -5,7 +5,7 @@ module.exports = {
     createItem: async(req, res, next) => {
         try {
             console.log("Create item function", req.body)
-            let queryInsertItem = `INSERT INTO item (name, idcategory, description, price, discount) VALUES (${db.escape(req.body.name)}, ${db.escape(req.body.idcategory)}, ${db.escape(req.body.description)}, ${db.escape(req.body.price)}, ${db.escape(req.body.discount)})`
+            let queryInsertItem = `INSERT INTO item (name, idcategory, description, price, discount, imageURL) VALUES (${db.escape(req.body.name)}, ${db.escape(req.body.idcategory)}, ${db.escape(req.body.description)}, ${db.escape(req.body.price)}, ${db.escape(req.body.discount)}, ${db.escape(req.body.imageURL)})`
             await dbQuery(queryInsertItem)
             res.status(200).send({message: "Add item success!"})
         } catch (error) {
@@ -15,8 +15,8 @@ module.exports = {
 
     readItem: async(req, res, next) => {
         try {
-            console.log("Read item function")
-            let queryReadItem = `SELECT item.id as id, name, title, description, price, discount FROM item JOIN category ON item.id = category.id`
+            // console.log("Read item function")
+            let queryReadItem = `SELECT item.id as id, name, title, idcategory, title as category, description, price, discount, imageURL FROM item JOIN category ON item.idcategory = category.id`
             let dataItem = await dbQuery(queryReadItem)
             res.status(200).send(dataItem)
         } catch (error) {
