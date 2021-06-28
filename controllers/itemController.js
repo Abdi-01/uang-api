@@ -4,7 +4,7 @@ const { db, dbQuery } = require('../config')
 module.exports = {
     createItem: async(req, res, next) => {
         try {
-            console.log("Create item function", req.body)
+            // console.log("Create item function", req.body)
             let queryInsertItem = `INSERT INTO item (name, idcategory, description, price, discount, imageURL) VALUES (${db.escape(req.body.name)}, ${db.escape(req.body.idcategory)}, ${db.escape(req.body.description)}, ${db.escape(req.body.price)}, ${db.escape(req.body.discount)}, ${db.escape(req.body.imageURL)})`
             await dbQuery(queryInsertItem)
             res.status(200).send({message: "Add item success!"})
@@ -26,7 +26,7 @@ module.exports = {
 
     updateItem: async(req, res, next) => {
         try {
-            console.log("Update item function")
+            // console.log("Update item function")
             let queryUpdateItem = `UPDATE item SET ? WHERE id = ${req.body.id}`
             await dbQuery(queryUpdateItem, req.body)
             res.status(200).send({message: "Update item success!"})
@@ -37,7 +37,7 @@ module.exports = {
 
     deleteItem: async(req, res, next) => {
         try {
-            console.log("Delete item function", req.params.id)
+            // console.log("Delete item function", req.params.id)
             let queryDeleteItem = `DELETE FROM item WHERE id = ${req.params.id}`
             await dbQuery(queryDeleteItem)
             res.status(200).send({message: "Delete item success!"})
