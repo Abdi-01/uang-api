@@ -1,16 +1,17 @@
 const express = require('express')
-const PORT = process.env.PORT || 2000
+const PORT = process.env.PORT || 4000
 const app = express()
 const cors = require('cors')
 
 const { db } = require('./config/database')
-const { itemRouter } = require('./routes')
+const { itemRouter, receiptRouter } = require('./routes')
 
 app.use(cors())
 app.use(express.json())
 app.use('/item', itemRouter)
+app.use('/receipt', receiptRouter)
 app.get('/', (req, res, next) => {
-    res.status(200).send('Purwa Express API')
+    res.status(200).send('UANG API')
 })
 
 db.getConnection(( error, connection ) => {
@@ -26,4 +27,4 @@ app.use((error, req, res, next) => {
     res.status(500).send({status: "Error MySQL!", messages: error})
 })
 
-app.listen(PORT, () => console.log('WARTA API is Running :', PORT))
+app.listen(PORT, () => console.log('UANG API is Running :', PORT))
