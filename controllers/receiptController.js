@@ -3,9 +3,6 @@ const { db, dbQuery } = require('../config')
 module.exports = {
     createReceipt: async (req, res, next) => {
         try {
-            // console.log(req.body)
-            // let queryInsertReceipt = `INSERT INTO customer_order (iditem, amount) VALUES (${req.body.idItems}, ${req.body.amount})`
-            // await dbQuery(queryInsertReceipt)
             req.body.forEach(async (element) => {
                 // console.log(element.idItems, element.amount)
                 try {
@@ -25,7 +22,8 @@ module.exports = {
 
     readReceipt: async (req, res, next) => {
         try {
-            let queryReadReceipt = `SELECT iditem, name, price * amount as subtotal, date FROM customer_order JOIN item ON customer_order.iditem = item.id`
+            // console.log(req.query)
+            let queryReadReceipt = `SELECT iditem, name, title as category, price * amount as subtotal, date FROM customer_order JOIN item ON customer_order.iditem = item.id JOIN category ON category.id = item.idcategory ORDER BY date ${req.query.sort} LIMIT ${req.params.limit} OFFSET ${req.params.offset}`
             let response = await dbQuery(queryReadReceipt)
             res.status(200).send(response)
         } catch (error) {

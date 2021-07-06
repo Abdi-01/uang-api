@@ -1,6 +1,13 @@
 const mysql = require('mysql')
 const util = require('util')
 
+// const db = mysql.createPool({
+//     host: process.env.HOSTSQL,
+//     user: process.env.USERSQL,
+//     password: process.env.PASSWORD,
+//     database: process.env.DBSQL
+// })
+
 const db = mysql.createPool({
     host: 'localhost',
     user: 'ido-p',

@@ -14,7 +14,7 @@ module.exports = {
 
     readItem: async(req, res, next) => {
         try {
-            console.log("Read item function")
+            // console.log("Read item function")
             let queryReadItem = `SELECT item.id as id, name, title, idcategory, title as category, description, price, discount, imageURL FROM item JOIN category ON item.idcategory = category.id`
             let dataItem = await dbQuery(queryReadItem)
             res.status(200).send(dataItem)
